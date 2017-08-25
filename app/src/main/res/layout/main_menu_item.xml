@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <data>
+    <variable
+      name="item"
+      type="niko.ru.ime.model.Menu" />
+  </data>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/lrItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@android:color/darker_gray" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="16dp"
+      android:gravity="end"
+      android:text="@{item.name}"
+      android:textColor="@android:color/white"
+      android:textSize="22sp" />
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@android:color/darker_gray" />
+  </LinearLayout>
+</layout>
