@@ -1,21 +1,11 @@
 package niko.ru.ime.ui.main;
 
-import static niko.ru.ime.Config.ABOUT_US;
-import static niko.ru.ime.Config.ALBUM;
-import static niko.ru.ime.Config.EMPLOYEES_FAC;
-import static niko.ru.ime.Config.INFORMATION;
-import static niko.ru.ime.Config.PHOTO;
-import static niko.ru.ime.Config.SHARE;
-import static niko.ru.ime.Config.TEACHERS;
-import static niko.ru.ime.Config.THREE_D;
-
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 import com.github.nitrico.lastadapter.Holder;
 import com.github.nitrico.lastadapter.ItemType;
 import com.github.nitrico.lastadapter.LastAdapter;
@@ -50,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             holder.getBinding().lrItem.setOnClickListener(v -> {
               Menu menu = holder.getBinding().getItem();
               Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+              intent.putExtra("title", menu.getName());
               intent.putExtra("url", menu.getUrl());
               startActivity(intent);
             });

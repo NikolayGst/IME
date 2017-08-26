@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+    <niko.ru.ime.common.TouchImageView
+      android:id="@+id/image"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="match_parent"
+      android:background="@color/trans_gray"
+      android:padding="16dp"
+      android:textSize="20sp"
+      android:gravity="center"
+      android:textColor="@android:color/white"
+      android:layout_height="wrap_content" />
+    <TextView
+      android:id="@+id/close"
+      android:layout_width="match_parent"
+      android:background="@color/trans_gray"
+      android:text="ЗАКРИТИ"
+      android:padding="16dp"
+      android:textSize="20sp"
+      android:layout_alignParentBottom="true"
+      android:gravity="center"
+      android:textColor="@android:color/white"
+      android:layout_height="wrap_content" />
+  </RelativeLayout>
+</layout>

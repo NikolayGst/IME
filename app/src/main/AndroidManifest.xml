@@ -23,9 +23,10 @@
     </activity>
     <activity android:name=".ui.detail.DetailActivity"
       android:theme="@style/NoActionBar"
-      android:screenOrientation="portrait">
-
-    </activity>
+      android:screenOrientation="portrait"/>
+    <activity android:name=".ui.viewer.ImageViewer"
+      android:theme="@style/NoActionBar"
+      android:screenOrientation="portrait"/>
   </application>
 
 </manifest>

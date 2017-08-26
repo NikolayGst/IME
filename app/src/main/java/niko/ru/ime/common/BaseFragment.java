@@ -1,8 +1,10 @@
 package niko.ru.ime.common;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.widget.Toast;
+import niko.ru.ime.R;
 
 public class BaseFragment extends Fragment {
 
@@ -16,6 +18,19 @@ public class BaseFragment extends Fragment {
     getFragmentManager().beginTransaction()
         .replace(id, baseFragment)
         .addToBackStack("stack").commit();
+  }
+
+  public void setTitle(String title) {
+    Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+    toolbar.setTitle(title);
+    toolbar.setNavigationIcon(R.mipmap.ic_back);
+    toolbar.setNavigationOnClickListener(v -> {
+      if (getFragmentManager().getBackStackEntryCount() == 0) {
+        getActivity().finish();
+      } else {
+        getFragmentManager().popBackStack();
+      }
+    });
   }
 
   /**
@@ -35,7 +50,7 @@ public class BaseFragment extends Fragment {
     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
   }
 
-  public void showInWebView(WebView web,String body) {
+  public void showInWebView(WebView web, String body) {
     String strBody = "<html>"
         + "<head></head>"
         + "<style type='text/css'>body{text-align:justify;line-height:25px;}</style>"

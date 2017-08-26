@@ -3,13 +3,12 @@ package niko.ru.ime.ui.detail;
 import static niko.ru.ime.Config.ABOUT_US;
 import static niko.ru.ime.Config.ALBUM;
 import static niko.ru.ime.Config.EMPLOYEES_FAC;
-import static niko.ru.ime.Config.INFORMATION;
-import static niko.ru.ime.Config.PHOTO;
+import static niko.ru.ime.Config.INFO_KAF;
+import static niko.ru.ime.Config.PHOTO_AUDITOR;
 import static niko.ru.ime.Config.SHARE;
 import static niko.ru.ime.Config.TEACHERS;
 import static niko.ru.ime.Config.THREE_D;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,21 +42,14 @@ public class DetailActivity extends AppCompatActivity {
         case ABOUT_US:
           selectedFragment = new AboutFragment();
           break;
-        case INFORMATION:
-          break;
+        case INFO_KAF:
         case EMPLOYEES_FAC:
-          selectedFragment = new ListFragment();
-          args.putString("type", EMPLOYEES_FAC);
-          selectedFragment.setArguments(args);
-          break;
         case TEACHERS:
-          selectedFragment = new ListFragment();
-          args.putString("type", TEACHERS);
-          selectedFragment.setArguments(args);
-          break;
-        case PHOTO:
-          break;
+        case PHOTO_AUDITOR:
         case ALBUM:
+          selectedFragment = new ListFragment();
+          args.putAll(data);
+          selectedFragment.setArguments(args);
           break;
         case THREE_D:
           break;
@@ -90,5 +82,9 @@ public class DetailActivity extends AppCompatActivity {
     getSupportFragmentManager().beginTransaction()
         .replace(id, baseFragment)
         .addToBackStack(tag).commit();
+  }
+
+  public ActivityDetailBinding getBind() {
+    return bind;
   }
 }
