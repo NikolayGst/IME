@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import niko.ru.ime.R;
+import niko.ru.ime.app.GlideApp;
 import niko.ru.ime.common.BaseFragment;
 import niko.ru.ime.databinding.FragmentAboutBinding;
 
@@ -28,6 +29,12 @@ public class AboutFragment extends BaseFragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     view = FragmentAboutBinding.inflate(inflater, container, false);
+
+    setTitle("Про факультет ІМЕ");
+
+    GlideApp.with(this).load("http://mdpu.org.ua/new/images/files/priloshenie/album/n1_1.jpg")
+        .placeholder(R.color.colorPrimary)
+        .centerCrop().into(view.image);
 
     view.text.setText(getString(R.string.about_desc));
     // Inflate the layout for this fragment

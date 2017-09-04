@@ -28,4 +28,14 @@ public class Employee {
   public String getUrlAvatar() {
     return urlAvatar;
   }
+
+  @Override
+  public String toString() {
+    return "Employee{" +
+        "username='" + username + '\'' +
+        ", shortDesc='" + shortDesc + '\'' +
+        ", fullDesc='" + fullDesc + '\'' +
+        ", urlAvatar='" + urlAvatar + '\'' +
+        '}';
+  }
 }

@@ -1,7 +1,11 @@
 package niko.ru.ime.ui.main;
 
+import static niko.ru.ime.Config.SHARE;
+import static niko.ru.ime.Config.THREE_D;
+
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,10 +42,24 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void onCreate(Holder<MainMenuItemBinding> holder) {
             holder.getBinding().lrItem.setOnClickListener(v -> {
+              Intent intent = null;
               Menu menu = holder.getBinding().getItem();
-              Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-              intent.putExtra("title", menu.getName());
-              intent.putExtra("url", menu.getUrl());
+              switch (menu.getUrl()) {
+                case SHARE:
+                  intent = new Intent(Intent.ACTION_SEND);
+                  intent.putExtra(Intent.EXTRA_TEXT,
+                      "Встановіть безкоштовний додаток \"Путівник МДПУ\" за посиланням: http://...");
+                  intent.setType("text/plain");
+                  break;
+                case THREE_D:
+                  intent = new Intent(Intent.ACTION_VIEW,
+                      Uri.parse("http://www.mdpu.org.ua/new/uk/3d-.html"));
+                  break;
+                default:
+                  intent = new Intent(MainActivity.this, DetailActivity.class);
+                  intent.putExtra("title", menu.getName());
+                  intent.putExtra("url", menu.getUrl());
+              }
               startActivity(intent);
             });
           }

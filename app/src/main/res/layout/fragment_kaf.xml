@@ -7,25 +7,25 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:orientation="vertical">
-
-      <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_height="200dp" />
-
+  <TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:textSize="22sp"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:textStyle="bold"
+    android:textColor="@android:color/black"
+    android:layout_height="wrap_content" />
 
   <com.uncopt.android.widget.text.justify.JustifiedTextView
-    android:id="@+id/text"
+    android:id="@+id/desc"
     android:layout_margin="8dp"
     android:textSize="17sp"
     android:textColor="@android:color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
-    </LinearLayout>
-  </ScrollView>
-
+</LinearLayout>
+</ScrollView>
 </layout>

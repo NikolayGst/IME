@@ -1,10 +1,12 @@
 package niko.ru.ime.common;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.widget.Toast;
 import niko.ru.ime.R;
+import niko.ru.ime.ui.viewer.ImageViewer;
 
 public class BaseFragment extends Fragment {
 
@@ -50,15 +52,11 @@ public class BaseFragment extends Fragment {
     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
   }
 
-  public void showInWebView(WebView web, String body) {
-    String strBody = "<html>"
-        + "<head></head>"
-        + "<style type='text/css'>body{text-align:justify;line-height:25px;}</style>"
-        + "<body>"
-        + body
-        + "</body>"
-        + " </html>  ";
-    web.loadDataWithBaseURL("", strBody, "text/html", "UTF-8", "");
+  public void showImage(String title, String url) {
+    Intent intent = new Intent(getActivity(), ImageViewer.class);
+    intent.putExtra("title", title);
+    intent.putExtra("url", url);
+    startActivity(intent);
   }
 
   //Проверка на активность фрагмента в активности

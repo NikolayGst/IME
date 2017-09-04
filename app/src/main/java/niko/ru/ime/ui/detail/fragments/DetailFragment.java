@@ -1,6 +1,7 @@
 package niko.ru.ime.ui.detail.fragments;
 
 
+import static niko.ru.ime.Config.ABOUT_US;
 import static niko.ru.ime.Config.EMPLOYEES_FAC;
 import static niko.ru.ime.Config.INFO_KAF;
 import static niko.ru.ime.Config.TEACHERS;
@@ -19,7 +20,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import com.github.nitrico.lastadapter.Holder;
 import com.github.nitrico.lastadapter.ItemType;
@@ -30,21 +30,23 @@ import niko.ru.ime.R;
 import niko.ru.ime.app.GlideApp;
 import niko.ru.ime.common.BaseFragment;
 import niko.ru.ime.databinding.EmployeeItemBinding;
-import niko.ru.ime.databinding.FragmentListBinding;
+import niko.ru.ime.databinding.FragmentDetailBinding;
 import niko.ru.ime.databinding.InfoKafItemBinding;
 import niko.ru.ime.databinding.PhotoAuditorItemBinding;
 import niko.ru.ime.model.Employee;
 import niko.ru.ime.model.Kafedra;
 import niko.ru.ime.model.Photo;
+import niko.ru.ime.ui.detail.DetailActivity;
 import niko.ru.ime.ui.viewer.ImageViewer;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFragment extends BaseFragment {
+public class DetailFragment extends BaseFragment {
 
-  FragmentListBinding view;
+  private FragmentDetailBinding view;
   private LastAdapter adapter;
+  private int containerId;
 
   private Bundle args;
 
@@ -57,6 +59,12 @@ public class ListFragment extends BaseFragment {
         if (!item.getUrlAvatar().equals("")) {
           showImage(item.getUsername(), item.getUrlAvatar());
         }
+      });
+      holder.getBinding().rlItem.setOnClickListener(v -> {
+        Employee item = holder.getBinding().getItem();
+        showFragment(EmployeeFragment
+            .newInstance(item.getUsername(), item.getShortDesc() + "\n" + item.getFullDesc(),
+                item.getUrlAvatar()), containerId);
       });
     }
   };
@@ -72,7 +80,7 @@ public class ListFragment extends BaseFragment {
     }
   };
 
-  public ListFragment() {
+  public DetailFragment() {
     // Required empty public constructor
   }
 
@@ -80,9 +88,11 @@ public class ListFragment extends BaseFragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    view = FragmentListBinding.inflate(inflater, container, false);
+    view = FragmentDetailBinding.inflate(inflater, container, false);
 
     view.recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+    containerId = ((DetailActivity) getActivity()).getBind().container.getId();
 
     handleTypeList();
 
@@ -100,6 +110,12 @@ public class ListFragment extends BaseFragment {
               .map(Kafedra.class, new ItemType<InfoKafItemBinding>(R.layout.info_kaf_item) {
                 @Override
                 public void onCreate(Holder<InfoKafItemBinding> holder) {
+                  holder.getBinding().lrItem.setOnClickListener(v -> {
+                    Kafedra kaf = holder.getBinding().getItem();
+                    showFragment(KafFragment.newInstance(kaf.getName(), kaf.getDesc()),
+                        containerId);
+                  });
+
                 }
               });
           break;
@@ -128,17 +144,11 @@ public class ListFragment extends BaseFragment {
     }
   }
 
-  private void showImage(String title, String url) {
-    Intent intent = new Intent(getActivity(), ImageViewer.class);
-    intent.putExtra("title", title);
-    intent.putExtra("url", url);
-    startActivity(intent);
-  }
 
   @BindingAdapter("app:setImage")
   public static void setImage(ImageView image, String url) {
     GlideApp.with(image).load(url).placeholder(R.drawable.placeholder)
-        .centerCrop().into(image);
+        .centerCrop().circleCrop().into(image);
   }
 
 
