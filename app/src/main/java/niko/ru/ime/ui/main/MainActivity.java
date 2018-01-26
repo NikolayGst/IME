@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 case SHARE:
                   intent = new Intent(Intent.ACTION_SEND);
                   intent.putExtra(Intent.EXTRA_TEXT,
-                      "Встановіть безкоштовний додаток \"Путівник МДПУ\" за посиланням: http://...");
+                      "Встановіть безкоштовний додаток \"Путівник МДПУ\" за посиланням: https://drive.google.com/file/d/0B_qABx_4qFCiVFlVZUNRY3diRmc/view");
                   intent.setType("text/plain");
                   break;
                 case THREE_D:
